@@ -36,7 +36,7 @@
       </ul>
     </div>
   </div>
-</nav>
+</nav> <!--what-->
 <!-- Masthead-->
 <header class="masthead bg-primary text-white text-center">
   <div class="container d-flex align-items-center flex-column">
