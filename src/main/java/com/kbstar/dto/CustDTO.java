@@ -10,5 +10,6 @@ import lombok.*;
 public class CustDTO {
     private String id;
     private String pwd;
+    private String pwd_check;
     private String name;
 }
