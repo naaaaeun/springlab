@@ -17,7 +17,7 @@ class InsertTest {
     CartService service;
     @Test
     void contextLoads() {
-        Cart obj = new Cart("id02",101,1);
+        Cart obj = new Cart("id01",101,3);
         try {
             service.register(obj);
             service.get();

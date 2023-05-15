@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <style>
   #all {
     width: 400px;
@@ -49,7 +48,8 @@
     },
     connect:function(){
       var sid = this.id;
-      var socket = new SockJS('http://127.0.0.1:8088/ws');
+      // var socket = new SockJS('http://127.0.0.1:8088/ws');
+      var socket = new SockJS('${adminServer}/ws');
       this.stompClient = Stomp.over(socket);
 
       this.stompClient.connect({}, function(frame) {
@@ -117,19 +117,8 @@
 
 </script>
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="col-sm-8 text-left">
 
-  <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Live Chart</h1>
-
-  <!-- DataTales Example -->
-  <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Live Chart</h6>
-    </div>
-    <div class="card-body">
-      <div id="container"></div>
-      <div class="col-sm-5">
         <h1 id="adm_id">${logincust.id}</h1>
         <H1 id="status">Status</H1>
         <button id="connect">Connect</button>
@@ -148,8 +137,5 @@
         <input type="text" id="totext"><button id="sendto">Send</button>
         <div id="to"></div>
 
-      </div>
-    </div>
-  </div>
   <!-- /.container-fluid -->
 </div>

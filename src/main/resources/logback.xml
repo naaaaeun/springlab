@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOGS_DIR" value="c://project/logs" />
+    <property name="LOGS_DIR" value="/Users/naeunlee/Documents/spring/logs" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -37,7 +37,19 @@
             <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
-
+    <appender name="FILE3" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_DIR}/cartinfo.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}, %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS_DIR}/cartinfo.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
 
 
     <logger name="org.springframework.web" level="DEBUG">
@@ -47,6 +59,10 @@
     <logger name="com.kbstar.controller.CustController" level="INFO">
         <appender-ref ref="FILE2" />
     </logger>
+    <logger name="com.kbstar.service.CartService" level="INFO">
+        <appender-ref ref="FILE3" />
+    </logger>
+
 
     <root level="INFO">
         <appender-ref ref="STDOUT" />
