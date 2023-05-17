@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
-public class Web19application {
+public class Web20application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Web19application.class, args);
+        SpringApplication.run(Web20application.class, args);
     }
     @Bean
     public InternalResourceViewResolver setupViewResolver() {
