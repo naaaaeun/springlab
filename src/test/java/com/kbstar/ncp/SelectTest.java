@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -18,12 +19,16 @@ class SelectTest {
 
     @Value("${uploadimgdir}")
     String imgpath;
+    @Autowired
+    CFRCelebrityUtil cfrCelebrityUtil ;
+    @Autowired
+    CFRFaceUtil cfrFaceUtil ;
 
     @Test
     void CFRCelebrityUtilTest() {
         try {
-            String imgname = "snapshot_684.jpg";
-            JSONObject text = (JSONObject) CFRCelebrityUtil.getText(imgpath, imgname);
+            String imgname = "ma.png";
+            JSONObject text = (JSONObject) cfrFaceUtil.getResult(imgpath, imgname);
             log.info(String.valueOf(text));
         } catch (Exception e) {
             log.info("에러..");
@@ -34,10 +39,11 @@ class SelectTest {
     @Test
     void CFRFaceUtilTest() {
         try {
-            String imgname = "snapshot_684.jpg";
-            JSONObject text = (JSONObject) CFRFaceUtil.getResult(imgpath, imgname);
+            String imgname = "na.png";
+            JSONObject text = (JSONObject) cfrFaceUtil.getResult(imgpath, imgname);
             log.info(String.valueOf(text));
         } catch (Exception e) {
+            e.printStackTrace();
             log.info("에러..");
             //e.printStackTrace();
         }

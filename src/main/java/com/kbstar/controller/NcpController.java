@@ -8,6 +8,7 @@ import com.kbstar.util.OCRUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +24,18 @@ public class NcpController {
     @Value("${uploadimgdir}")
     String imgpath;
 
+    @Autowired
+    CFRCelebrityUtil cfrCelebrityUtil ;
+    @Autowired
+    CFRFaceUtil cfrFaceUtil ;
     @RequestMapping("/cfr1impl")
     public String cfr1impl(Model model, Ncp ncp) {
+
 
         FileUploadUtil.saveFile(ncp.getImg(), imgpath);
 
         String imgname = ncp.getImg().getOriginalFilename();
-        JSONObject result = (JSONObject) CFRCelebrityUtil.getText(imgpath, imgname);
+        JSONObject result = (JSONObject) cfrCelebrityUtil.getText(imgpath, imgname);
 
         JSONArray faces = (JSONArray) result.get("faces");
         JSONObject object = (JSONObject) faces.get(0);
@@ -51,7 +57,7 @@ public class NcpController {
         FileUploadUtil.saveFile(ncp.getImg(), imgpath);
 
         String imgname = ncp.getImg().getOriginalFilename();
-        JSONObject result = (JSONObject) CFRFaceUtil.getResult(imgpath, imgname);
+        JSONObject result = (JSONObject) cfrFaceUtil.getResult(imgpath, imgname);
 
         JSONArray faces = (JSONArray) result.get("faces");
         JSONObject object = (JSONObject) faces.get(0);
@@ -74,7 +80,7 @@ public class NcpController {
     @RequestMapping("/mycfr")
     public String mycfr(Model model, String imgname) {
 
-        JSONObject result = (JSONObject) CFRFaceUtil.getResult(imgpath, imgname);
+        JSONObject result = (JSONObject) cfrFaceUtil.getResult(imgpath, imgname);
 
         JSONArray faces = (JSONArray) result.get("faces");
         JSONObject object = (JSONObject) faces.get(0);
